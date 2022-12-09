@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 function generatePassword($password_length) {
     $numbers = "0123456789";
@@ -17,7 +18,9 @@ function generatePassword($password_length) {
             $char = $full_chars[$index];
             $password .= $char;
         }
-        $result = $password;
+        //$result = $password;
+        $_SESSION["password"] = $password;
+        header("Location: ./success.php");
     } else {
         $result = "La password deve essere di minimo 8 caratteri e massimo 35";
     }
