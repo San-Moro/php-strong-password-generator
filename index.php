@@ -4,33 +4,13 @@ Una nostra funzione utilizzerà questo dato per generare una password casuale (c
 Scriviamo tutto (logica e layout) in un unico file *index.php* -->
 
 <?php
-$numbers = "0123456789";
-$uppercase_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-$lowercase_letters = "abcdefghijklmnopqrstuvwxyz";
-$simbols = "!£$%&?*+@#-_~/<>()[]{}";
-$full_chars = $numbers.$uppercase_letters.$lowercase_letters.$simbols;
+include __DIR__ ."/functions.php";
 
 if (isset($_GET["password-length"])) {
-    $password_length = $_GET["password-length"];
-    $result = "";
-
-    if ($password_length >= 8 && $password_length <= 35) {
-        $password = "";
-
-        while (strlen($password) < $password_length) {
-            $index = rand(0, (strlen($full_chars) - 1));
-            $char = $full_chars[$index];
-            $password .= $char;
-        }
-        $result = $password;
-    }
+    $password_length = intval($_GET["password-length"]);
+    $result = generatePassword($password_length);
 }
 
-// funzione che genera un numero random,
-// in base al numero random prendo dall'array l'elemento (numero random = indice elemento),
-// pusho l'elemento in un nuovo array password items,
-// ripeto per ogni array,
-// ripeto tutto n. volte = password_length,
 ?>
 
 <!DOCTYPE html>
